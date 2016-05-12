@@ -2,8 +2,16 @@ extends layout
 
 block content
   h1= title
-  h2 References
-  p All
+  h4 Resources
   ul
-    li NASA
+    li: a(href="http://localhost:3000/planets") http://localhost:3000/planets
+    li: a(href="http://localhost:3000/planets/{id}") http://localhost:3000/planets/{id}
 
+  h4 Home
+  ul
+    li: a(href="http://localhost:3000/") http://localhost:3000/
+
+  h4 References
+  p All of the planet information and images were downloaded from:
+  ol
+    li: a(href="http://solarsystem.nasa.gov/planets/") Solar System Exploration by NASA

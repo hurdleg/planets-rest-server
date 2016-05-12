@@ -1,5 +1,5 @@
 {
-  "name": "planets-server-gen",
+  "name": "planets-rest-server",
   "version": "0.0.0",
   "private": true,
   "scripts": {
