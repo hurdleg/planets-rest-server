@@ -42,7 +42,7 @@ planetRouter.route('/:planetId/image')
                 'x-sent': true
             }
         };
-        response.sendFile( thePlanet.image + "xxx", options, function(err) {
+        response.sendFile( thePlanet.image, options, function(err) {
             if ( err ) {
                 console.log( err );
                 response.status(err.status).end();
