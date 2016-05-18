@@ -2,10 +2,11 @@
 
 ## Suported REST API
 
-| Verb | URL           |  Description        |
-|------|:-------------:| ------------------ :|
-| GET  | /planets/     | Get list of planets |
-| GET  | /planets/:id  | Get planet by id    |
+| Title                  | URL                | Request type | Parameters | Expected Responses         |
+|------------------------|:------------------:|:------------:|:----------:|:--------------------------:|
+| Get list of planets    | /planets           | GET          | n/a        | Success: 200, Failure: 404 |
+| Get planet by ID       | /planets/:id       | GET          | planetId   | Success: 200, Failure: 404 |
+| Get image for planetId | /planets/:id/image | GET          | planetId   | Success: 200, Failure: 404 |
 
 ## Installation
 Grab all of the required node modules for this app.
