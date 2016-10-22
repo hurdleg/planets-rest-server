@@ -8,16 +8,33 @@
 | Get planet by ID       | /planets/:id       | GET          | planetId   | Success: 200, Failure: 404 |
 | Get image for planetId | /planets/:id/image | GET          | planetId   | Success: 200, Failure: 404 |
 
-## Installation
+## Installation (Bluemix)
+1. build and test app http://localhost:3000
+2. add: mainfest.yml
+3. edit: ./bin/www > var port = normalizePort(process.env.VCAP_APP_PORT || '3000');
+4. edit: package.json > add: cf modules
+5. copy: .cfignore
+6. cf login # email / pw
+7. cf push
+
+Enjoy!
+
+## Installation (localhost)
 Grab all of the required node modules for this app.
 1. npm install
 
-> This step is only performed once.
+> This step is done once.
 
-## Usage
+## Usage (Bluemix)
+1. Open a browser
+   * https://planets-hurdleg.mybluemix.net
+   * https://planets-hurdleg.mybluemix.net/planets
+   * https://planets-hurdleg.mybluemix.net/planets/{0..7}
+
+## Usage (localhost)
 1. npm start
 2. Open a browser
-   * http://localhost:3000/
+   * http://localhost:3000
    * http://localhost:3000/planets
    * http://localhost:3000/planets/{0..7}
 3. To stop the Express server, type `control-C`

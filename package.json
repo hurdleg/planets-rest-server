@@ -1,9 +1,18 @@
 {
   "name": "planets-rest-server",
-  "version": "0.0.0",
-  "private": true,
+  "main": "./bin/www",
+    "description": "REST API Server for the Planets of Our Solar System",
+  "version": "1.0.2",
+  "private": false,
+  "engines": {
+    "node": "4.4.*"
+  },
   "scripts": {
     "start": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hurdleg/planets-rest-server.git"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -12,6 +21,11 @@
     "express": "~4.13.1",
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
-  }
+    "serve-favicon": "~2.3.0",
+    "//": "Cloud Foundary / Bluemix",
+    "cf-deployment-tracker-client": "*",
+    "cfenv": "1.0.x"
+  },
+  "author": "Gerald.Hurdle@AlgonquinCollege.com",
+  "license": "GNU General Public License"
 }
