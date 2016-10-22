@@ -50,5 +50,5 @@ Grab all of the required node modules for this app.
 
 ## References
 All of the planet information and images were downloaded from:
-1. [Solar System Exploration](http://solarsystem.nasa.gov/planets/) by [NASA](http://http://www.nasa.gov/)
+1. [Solar System Exploration](http://solarsystem.nasa.gov/planets/) by [NASA](http://www.nasa.gov)
 
