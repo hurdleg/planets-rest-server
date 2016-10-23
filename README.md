@@ -30,6 +30,7 @@ Grab all of the required node modules for this app.
    * https://planets-hurdleg.mybluemix.net
    * https://planets-hurdleg.mybluemix.net/planets
    * https://planets-hurdleg.mybluemix.net/planets/{0..7}
+   * https://planets-hurdleg.mybluemix.net/planets/{0..7}/image
 
 ## Usage (localhost)
 1. npm start
@@ -37,6 +38,7 @@ Grab all of the required node modules for this app.
    * http://localhost:3000
    * http://localhost:3000/planets
    * http://localhost:3000/planets/{0..7}
+   * http://localhost:3000/planets/{0..7}/image
 3. To stop the Express server, type `control-C`
 
 ## Error Handling

@@ -2,13 +2,12 @@
  * PlanetRepository class deals with planet persistence
  *
  * References:
- * 1. A simple REST API with Node.js and Express (https://gist.github.com/ixzo/4750663)
+ * 1. A simple REST API with Node.js and Express (https://gist.github.com/erichonorez/4750663)
  * 2. Node.js Module Patterns using Simple Example (https://darrenderidder.github.io/talks/ModulePatterns/#/)
  */
 var PlanetRepository = function () {
     this.planets = require( './planet-data.json' );
     this.nextId = this.planets.length + 1;
-
 }
 /**
  * Find a planet by id
@@ -53,7 +52,7 @@ PlanetRepository.prototype.findAll = function () {
  * Param: planet the planet to save
  */
 PlanetRepository.prototype.save = function (planet) {
-    if (planet.plaentId == null || planet.planet == 0) {
+    if (planet.plaentId == null || planet.planetId == 0) {
         planet.planetId = this.nextId;
         this.planets.push(planet);
         this.nextId++;

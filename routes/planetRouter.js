@@ -17,7 +17,7 @@ planetRouter.route('/')
  * HTTP GET /planets/:planetId
  * Param: :planetId is the unique identifier of the planet you want to retrieve
  * Returns: the planet with the specified :planetId in a JSON format
- * Error: 404 HTTP code if the task doesn't exists
+ * Error: 404 HTTP code if the planet doesn't exists
  */
 planetRouter.route('/:planetId')
 .get(function (request, response, next) {
