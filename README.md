@@ -50,6 +50,10 @@ Grab all of the required node modules for this app.
 
    404 - Planet with Id 8 not found!
 
+## Source Code
+Available from GitHub:
+https://github.com/hurdleg/planets-rest-server
+
 ## References
 All of the planet information and images were downloaded from:
 1. [Solar System Exploration](http://solarsystem.nasa.gov/planets/) by [NASA](http://www.nasa.gov)
