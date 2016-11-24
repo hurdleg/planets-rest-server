@@ -11,6 +11,26 @@ var planetRouter = express.Router();
 planetRouter.route('/')
 .get(function (request, response, next) {
     response.json( {planets: planetsDB.findAll()} );
+})
+
+/**
+ * HTTP POST /planets
+ * Create a new planet.
+ * Param: planet JSONObject
+ * Returns: the newly created planet in JSON
+ * Error: 500 HTTP code if the planet cannot be created
+ */
+.post(function (request, response, next) {
+    try {
+        console.log( request.body );
+        planetsDB.save( request.body );
+        response.json( request.body );
+        console.log( 'POST (create) planet: ' + request.body.name );
+    } catch (expection) {
+        console.log( expection );
+        response.status( 500 )
+                .send( "Error: could not create planet: " + request.body.name );
+    }
 });
 
 /**
@@ -23,6 +43,41 @@ planetRouter.route('/:planetId')
 .get(function (request, response, next) {
     try {
         response.json( planetsDB.find(request.params.planetId) );
+    } catch (exception) {
+        response.status( 404 )
+                .send( "Planet with Id " + request.params.planetId + " not found!" );
+    }
+})
+
+/**
+ * HTTP PUT /planets
+ * Create a new planet.
+ * Returns: the newly created planet in JSON
+ * Error: 500 HTTP code if the planet cannot be updated
+ */
+.put(function (request, response, next) {
+    try {
+        console.log( request.body );
+        planetsDB.save( request.body );
+        response.json( request.body );
+        console.log( 'PUT (update) planet: ' + request.body.name );
+    } catch (expection) {
+        console.log( expection );
+        response.status( 500 )
+                .send( "Error: could not update planet: " + request.body.name );
+    }
+})
+
+/**
+ * HTTP DELETE /planets/:planetId
+ * Param: :planetId is the unique identifier of the planet you want to delete
+ * Returns: the planet with the specified :planetId in a JSON format
+ * Error: 404 HTTP code if the planet doesn't exists
+ */
+.delete(function (request, response, next) {
+    try {
+        planetsDB.remove( request.params.planetId );
+        response.json( request.params.planetId );
     } catch (exception) {
         response.status( 404 )
                 .send( "Planet with Id " + request.params.planetId + " not found!" );

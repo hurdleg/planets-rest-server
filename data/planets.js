@@ -7,7 +7,7 @@
  */
 var PlanetRepository = function () {
     this.planets = require( './planet-data.json' );
-    this.nextId = this.planets.length + 1;
+    this.nextId = this.planets.length;
 }
 /**
  * Find a planet by id
@@ -52,7 +52,7 @@ PlanetRepository.prototype.findAll = function () {
  * Param: planet the planet to save
  */
 PlanetRepository.prototype.save = function (planet) {
-    if (planet.plaentId == null || planet.planetId == 0) {
+    if (planet.planetId == null || planet.planetId == 0) {
         planet.planetId = this.nextId;
         this.planets.push(planet);
         this.nextId++;
@@ -69,6 +69,7 @@ PlanetRepository.prototype.save = function (planet) {
 PlanetRepository.prototype.remove = function (id) {
     var index = this.findIndex(id);
     this.planets.splice(index, 1);
+    this.nextId = this.nextId - 1;
 }
 
 exports.PlanetRepository = new PlanetRepository();
