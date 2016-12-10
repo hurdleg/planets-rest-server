@@ -53,14 +53,15 @@ PlanetRepository.prototype.findAll = function () {
  */
 PlanetRepository.prototype.save = function (planet) {
     if (planet.planetId == null || planet.planetId == 0) {
-        planet.planetId = this.nextId;
-        this.planets.push(planet);
-        this.nextId++;
+        if (this.nextId < 9) {    // only one more planet: Pluto
+            planet.planetId = this.nextId;
+            this.planets.push(planet);
+            this.nextId++;
+        }
     } else {
         var index = this.findIndex(planet.planetId);
         this.planets[index] = planet;
     }
-
 }
 /**
  * Remove a planet
