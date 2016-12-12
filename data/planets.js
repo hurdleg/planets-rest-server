@@ -53,12 +53,15 @@ PlanetRepository.prototype.findAll = function () {
  */
 PlanetRepository.prototype.save = function (planet) {
     if (planet.planetId == null || planet.planetId == 0) {
-        if (this.nextId < 9) {    // only one more planet: Pluto
+        if (this.nextId === 8) {    // only one more planet can be added (Pluto)
             planet.planetId = this.nextId;
             this.planets.push(planet);
             this.nextId++;
         }
     } else {
+        if ( this.nextId <= 8 ) {   // prevent updating the original 8 planets
+            return;                 // , and only update the extra planet (Pluto)
+        }
         var index = this.findIndex(planet.planetId);
         this.planets[index] = planet;
     }
@@ -68,6 +71,9 @@ PlanetRepository.prototype.save = function (planet) {
  * Param: id the of the planet to remove
  */
 PlanetRepository.prototype.remove = function (id) {
+    if ( this.nextId <= 8 ) {   // prevent deleting the original 8 planets
+        return;                 // , and only delete the extra planet (Pluto)
+    }
     var index = this.findIndex(id);
     this.planets.splice(index, 1);
     this.nextId = this.nextId - 1;

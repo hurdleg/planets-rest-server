@@ -79,8 +79,8 @@ planetRouter.route('/:planetId')
         planetsDB.remove( request.params.planetId );
         response.json( request.params.planetId );
     } catch (exception) {
-        response.status( 404 )
-                .send( "Planet with Id " + request.params.planetId + " not found!" );
+        response.status( 500 )
+                .send( "Error: could not delete planetId: " + request.params.planetId );
     }
 });
 
