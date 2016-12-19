@@ -10,7 +10,7 @@ var planetRouter = express.Router();
  */
 planetRouter.route('/')
 .get(function (request, response, next) {
-    response.json( {planets: planetsDB.findAll()} );
+    response.json( planetsDB.findAll() );
 })
 
 /**
