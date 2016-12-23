@@ -26,5 +26,5 @@
     "cfenv": "1.0.x"
   },
   "author": "Gerald.Hurdle@AlgonquinCollege.com",
-  "license": "GNU General Public License"
+  "license": "MIT"
 }
