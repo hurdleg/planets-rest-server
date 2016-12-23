@@ -1,6 +1,6 @@
-# REST API Server for the Planets of Our Solar System
+# RESTful API Server for the Planets of Our Solar System
 
-## Suported REST API
+## Suported RESTful API
 
 | Title                  | URL                | Request type | Parameters | Expected Responses         |
 |------------------------|:------------------:|:------------:|:----------:|:--------------------------:|
