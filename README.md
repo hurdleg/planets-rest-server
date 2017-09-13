@@ -27,10 +27,10 @@ Grab all of the required node modules for this app.
 
 ## Usage (Bluemix)
 1. Open a browser
-   * https://planets-hurdleg.mybluemix.net
-   * https://planets-hurdleg.mybluemix.net/planets
-   * https://planets-hurdleg.mybluemix.net/planets/{0..7}
-   * https://planets-hurdleg.mybluemix.net/planets/{0..7}/image
+   * https://planets.mybluemix.net
+   * https://planets.mybluemix.net/planets
+   * https://planets.mybluemix.net/planets/{0..7}
+   * https://planets.mybluemix.net/planets/{0..7}/image
 
 ## Usage (localhost)
 1. npm start

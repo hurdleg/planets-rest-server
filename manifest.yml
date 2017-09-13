@@ -2,5 +2,5 @@ applications:
 - path: .
   memory: 256M
   instances: 1
-  name: planets-hurdleg
-  host: planets-hurdleg
+  name: planets
+  host: planets
