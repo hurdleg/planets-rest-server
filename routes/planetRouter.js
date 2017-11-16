@@ -59,11 +59,6 @@ planetRouter.route('/')
     console.log( 'POST (create) planet: ' + request.body.name );
 });
 
-planetRouter.route('/count')
-.get(function (request, response, next) {
-    response.json( {'count': planetsDB.planets.length});
-});
-
 /**
  * HTTP GET /planets/:planetId
  * Param: :planetId is the unique identifier of the planet you want to retrieve
@@ -150,7 +145,8 @@ planetRouter.route('/:planetId')
 
         thePlanet = planetsDB.find( request.params.planetId );
         planetsDB.remove( request.params.planetId );
-        if (thePlanet.image != 'images/noimagefound.jpg') {
+        if ( (thePlanet.image != 'images/noimagefound.jpg') &&
+             (thePlanet.image != 'images/pluto.jpeg') ) {
             fs.unlinkSync('public/' + thePlanet.image);
         }
         response.json( thePlanet );
