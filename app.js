@@ -4,11 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var busboy = require('connect-busboy');
 
 var routes = require('./routes/index');
 var planetRouter = require('./routes/planetRouter');
 
 var app = express();
+
+// Multiform file upload for POST /buildings/:buildingId/image
+app.use(busboy());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
