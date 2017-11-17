@@ -46,11 +46,13 @@ planetRouter.route('/')
         return;
     }
 
+    // Validation rule: force planetId (if exists)
     if (request.body.planetId) {
         request.body.planetId = 0;
     }
 
     console.log( request.body );
+    // Default image if not found in body
     if ( !(request.body.image)) {
         request.body.image = 'images/noimagefound.jpg';
     }
@@ -112,8 +114,13 @@ planetRouter.route('/:planetId')
             return;
         }
 
+        // Validation rule: body's planetId must match query param's planetId
         if (request.body.planetId) {
-            request.body.planetId = request.params.planetId;
+            if (request.body.planetId != request.params.planetId) {
+                response.status( 500 )
+                .send( "Error: planetId does not match" );
+                return;
+            }
         }
 
         console.log( request.body );
@@ -132,7 +139,7 @@ planetRouter.route('/:planetId')
  * Param: :planetId is the unique identifier of the planet you want to delete
  * Returns: the planet with the specified :planetId in a JSON format
  * Error: 404 HTTP code if the planet doesn't exist
- * Error: 500 HTTP code if the planet Id is not 8 (for Pluto)
+ * Error: 500 HTTP code if the planet Id <= 7
  */
 .delete(function (request, response, next) {
     try {
