@@ -136,8 +136,8 @@ planetRouter.route('/:planetId')
  */
 .delete(function (request, response, next) {
     try {
-        // Validation rule: prevent deleting
-        if ( request.params.planetId != 8 ) {
+        // Validation rule: prevent deleting Mars..Earth..Neptune
+        if ( request.params.planetId <= 7 ) {
             response.status( 500 )
             .send( "Error: cannot delete this planet." );
             return;
