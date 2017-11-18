@@ -51,14 +51,15 @@ planetRouter.route('/')
         request.body.planetId = 0;
     }
 
-    console.log( request.body );
     // Default image if not found in body
     if ( !(request.body.image)) {
         request.body.image = 'images/noimagefound.jpg';
     }
+
     planetsDB.save( request.body );
-    response.json( request.body );
+    response.json( request.body );    
     console.log( 'POST (create) planet: ' + request.body.name );
+    console.log( request.body );
 });
 
 /**
@@ -127,6 +128,8 @@ planetRouter.route('/:planetId')
         planetsDB.save( request.body );
         response.json( request.body );
         console.log( 'PUT (update) planet: ' + request.body.name );
+        console.log( request.body );
+        
     } catch (expection) {
         console.log( expection );
         response.status( 404 )
@@ -157,6 +160,8 @@ planetRouter.route('/:planetId')
             fs.unlinkSync('public/' + thePlanet.image);
         }
         response.json( thePlanet );
+        console.log( 'DELETE planet Id: ' + thePlanet.planetId );
+        console.log( JSON.stringify(thePlanet) );
     } catch (exception) {
         console.log(exception);
         response.status( 404 )
@@ -220,14 +225,15 @@ planetRouter.route('/:planetId/image')
                 thePlanet = planetsDB.find( req.params.planetId );
                 thePlanet.image = 'images/' + filename;
                 planetsDB.save( thePlanet );
-                res.send( thePlanet );
+                res.json( thePlanet );
+                console.log( 'POST (uploaded) image: ' + thePlanet.image );                
             } catch (exception) {
                 console.log(exception);
                 if (req.params.planetId >= 8) {
                     fs.unlinkSync('public/images/' + filename);
                 }
                 res.status( 404 )
-                        .send( "Planet with Id " + req.params.planetId + " not found!" );
+                        .send( "Planet with Id " + req.params.planetId + " not found!" + " " + exception );
             }
         });
     });
