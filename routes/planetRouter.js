@@ -42,9 +42,16 @@ planetRouter.route('/')
     }
     if (!(request.body.distance_from_sun)) {
         response.status( 500 )
-        .send( "Error: missing distance from sun (float)" );
+        .send( "Error: missing distance from Sun (double)" );
         return;
     }
+    /*
+    if (!(request.body.numberOfMoons)) {
+        response.status( 500 )
+        .send( "Error: missing number of moons (int)" );
+        return;
+    }
+    */
 
     // Validation rule: force planetId (if exists)
     if (request.body.planetId) {
@@ -106,9 +113,16 @@ planetRouter.route('/:planetId')
         }
         if (!(request.body.distance_from_sun)) {
             response.status( 500 )
-            .send( "Error: missing distance from sun (float)" );
+            .send( "Error: missing distance from Sun (double)" );
             return;
         }
+        /*
+        if (!(request.body.numberOfMoons)) {
+            response.status( 500 )
+            .send( "Error: missing number of moons (int)" );
+            return;
+        }
+        */
         if (!(request.body.image)) {
             response.status( 500 )
             .send( "Error: missing image (string))" );

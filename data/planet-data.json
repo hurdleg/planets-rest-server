@@ -23,7 +23,7 @@
         "overview": "Our Home Planet",
         "image": "images/earth.png",
         "description": "Earth, our home planet, is the only planet in our solar system known to harbor life - life that is incredibly diverse. All the things we need to survive exist under a thin layer of atmosphere that separates us from the cold, airless void of space.",
-        "distance_from_sun": 1,
+        "distance_from_sun": 1.0,
         "number_of_moons": 1
     },
     {
@@ -72,4 +72,3 @@
         "number_of_moons": 14
     }
 ]
-
