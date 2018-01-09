@@ -2,6 +2,29 @@ var express = require('express');
 var path = require('path');
 var busboy = require('connect-busboy');
 var fs = require('fs');
+var multer = require('multer');                        // for parsing multipart/form-data
+var storage = multer.diskStorage({
+    destination: function(req, file, callback){
+        callback(null, './public/images/upload'); // set the destination
+    },
+    filename: function(req, file, callback){
+        var ext = file.originalname.substring(file.originalname.lastIndexOf('.') + 1);
+        if (ext == "") {
+            switch (file.mimetype) {
+                case 'image/jpeg':
+                    ext = '.jpeg';
+                    break;
+                case 'image/png':
+                    ext = '.png';
+                    break;
+            }
+            callback(null, file.originalname + ext); // set the file name and extension
+        } else {
+            callback(null, file.originalname);
+        }
+    }
+});
+var upload = multer({storage: storage});
 
 var planetsDB = require('../data/planets.js').PlanetRepository;
 
@@ -45,13 +68,11 @@ planetRouter.route('/')
         .send( "Error: missing distance from Sun (double)" );
         return;
     }
-    /*
-    if (!(request.body.numberOfMoons)) {
+    if (!(request.body.number_of_moons)) {
         response.status( 500 )
         .send( "Error: missing number of moons (int)" );
         return;
     }
-    */
 
     // Validation rule: force planetId (if exists)
     if (request.body.planetId) {
@@ -64,9 +85,65 @@ planetRouter.route('/')
     }
 
     planetsDB.save( request.body );
-    response.json( request.body );    
+    response.json( request.body );
     console.log( 'POST (create) planet: ' + request.body.name );
     console.log( request.body );
+});
+
+/**
+ * HTTP POST /planets/form
+ * Create a new planet AND upload image
+ * Param: planet JSONObject
+ * Returns: the newly created planet in JSON
+ * Error: 500 HTTP code if the planet cannot be created
+ */
+planetRouter.route('/form')
+.post(upload.single('image'), function (req, res, next) {
+    console.log("HERE");
+    // validate mime-type of image file
+    if ( req.file.mimetype != 'image/jpeg' && req.file.mimetype != 'image/png' ) {
+        return res.status(500).json({message: "Error: must upload image/jpeg or image/png for the planet's image."});
+    }
+
+    // Validation rule: mandatory properties
+    if (!(req.body.name)) {
+        res.status( 500 )
+        .send( "Error: missing name (string)" );
+        return;
+    }
+    if (!(req.body.overview)) {
+        res.status( 500 )
+        .send( "Error: missing overview (string)" );
+        return;
+    }
+    if (!(req.body.description)) {
+        res.status( 500 )
+        .send( "Error: missing description (string)" );
+        return;
+    }
+    if (!(req.body.distance_from_sun)) {
+        res.status( 500 )
+        .send( "Error: missing distance from Sun (double)" );
+        return;
+    }
+    if (!(req.body.number_of_moons)) {
+        res.status( 500 )
+        .send( "Error: missing number of moons (int)" );
+        return;
+    }
+
+    // Validation rule: force planetId (if exists)
+    if (req.body.planetId != null) {
+        req.body.planetId = 0;
+    }
+
+    req.body.image = "images/upload/" + req.file.originalname;
+
+    planetsDB.save( req.body );
+    res.json( req.body );
+    console.log( 'POST (form) planet: ' + req.body.name );
+    console.log( req.body );
+    console.log( req.file );
 });
 
 /**
@@ -143,7 +220,7 @@ planetRouter.route('/:planetId')
         response.json( request.body );
         console.log( 'PUT (update) planet: ' + request.body.name );
         console.log( request.body );
-        
+
     } catch (expection) {
         console.log( expection );
         response.status( 404 )
@@ -232,19 +309,19 @@ planetRouter.route('/:planetId/image')
         if ( mimetypes != 'image/jpeg' && mimetypes != 'image/png' ) {
             return res.status(500).json({message: "Error: must upload image/jpeg or image/png for the building's image."});
         }
-        fstream = fs.createWriteStream('./public/images/' + filename);
+        fstream = fs.createWriteStream('./public/images/upload/' + filename);
         file.pipe(fstream);
         fstream.on('close', function () {
             try {
                 thePlanet = planetsDB.find( req.params.planetId );
-                thePlanet.image = 'images/' + filename;
+                thePlanet.image = 'images/upload/' + filename;
                 planetsDB.save( thePlanet );
                 res.json( thePlanet );
-                console.log( 'POST (uploaded) image: ' + thePlanet.image );                
+                console.log( 'POST (uploaded) image: ' + thePlanet.image );
             } catch (exception) {
                 console.log(exception);
                 if (req.params.planetId >= 8) {
-                    fs.unlinkSync('public/images/' + filename);
+                    fs.unlinkSync('public/images/upload' + filename);
                 }
                 res.status( 404 )
                         .send( "Planet with Id " + req.params.planetId + " not found!" + " " + exception );
