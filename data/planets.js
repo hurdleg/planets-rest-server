@@ -10,6 +10,13 @@ var PlanetRepository = function () {
     this.nextId = this.planets.length;
 }
 /**
+ * Count the number of planets
+ * Returns: array of planets
+ */
+PlanetRepository.prototype.count = function () {
+    return this.planets.length;
+}
+/**
  * Find a planet by id
  * Param: id of the planet to find
  * Returns: the planet corresponding to the specified id

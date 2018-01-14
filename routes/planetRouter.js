@@ -47,6 +47,13 @@ planetRouter.route('/')
  * Error: 500 HTTP code if the planet cannot be created
  */
 .post(function (request, response, next) {
+    // Prevent multiple Plutos from being created
+    if ( planetsDB.count() > 8 ) {
+        response.status( 500 )
+                .send( "Error: Pluto already exits!" );
+        return;
+    }
+
     // Validation rule: mandatory properties
     if ( request.body.name == null ) {
         response.status( 500 )
@@ -96,6 +103,13 @@ planetRouter.route('/')
  */
 planetRouter.route('/form')
 .post(upload.single('image'), function (request, response, next) {
+    // Prevent multiple Plutos from being created
+    if ( planetsDB.count() > 8 ) {
+        response.status( 500 )
+                .send( "Error: Pluto already exits!" );
+        return;
+    }
+
     // validate mime-type of image file
     if ( request.file.mimetype != 'image/jpeg' && request.file.mimetype != 'image/png' ) {
         return response.status(500).json({message: "Error: must upload image/jpeg or image/png for the planet's image."});
@@ -136,7 +150,7 @@ planetRouter.route('/form')
     request.body.image = "images/upload/" + request.file.originalname;
 
     planetsDB.save( request.body );
-    res.json( request.body );
+    response.json( request.body );
     console.log( 'POST (form) planet: ' + request.body.name );
     console.log( request.body );
     console.log( request.file );
