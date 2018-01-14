@@ -106,28 +106,28 @@ planetRouter.route('/form')
     }
 
     // Validation rule: mandatory properties
-    if ( request.body.name == null ) {
-        response.status( 500 )
+    if ( req.body.name == null ) {
+        res.status( 500 )
         .send( "Error: missing name (string)" );
         return;
     }
-    if ( request.body.overview == null ) {
-        response.status( 500 )
+    if ( req.body.overview == null ) {
+        res.status( 500 )
         .send( "Error: missing overview (string)" );
         return;
     }
-    if ( request.body.description == null ) {
-        response.status( 500 )
+    if ( req.body.description == null ) {
+        res.status( 500 )
         .send( "Error: missing description (string)" );
         return;
     }
-    if ( request.body.distanceFromSun == null ) {
-        response.status( 500 )
+    if ( req.body.distanceFromSun == null ) {
+        res.status( 500 )
         .send( "Error: missing distance from Sun (double)" );
         return;
     }
-    if ( request.body.numberOfMoons == null ) {
-        response.status( 500 )
+    if ( req.body.numberOfMoons == null ) {
+        res.status( 500 )
         .send( "Error: missing number of moons (int)" );
         return;
     }
