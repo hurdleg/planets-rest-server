@@ -49,36 +49,24 @@ planetRouter.route('/')
 .post(function (request, response, next) {
     // Prevent multiple Plutos from being created
     if ( planetsDB.count() > 8 ) {
-        response.status( 500 )
-                .send( "Error: Pluto already exits!" );
-        return;
+        return response.status( 500 ).json( {message: "Error: Pluto already exits!"} );
     }
 
     // Validation rule: mandatory properties
     if ( request.body.name == null ) {
-        response.status( 500 )
-                .send( "Error: missing name (string)" );
-        return;
+        return response.status( 500 ).json( {message: "Error: missing name (string)"} );
     }
     if ( request.body.overview == null ) {
-        response.status( 500 )
-                .send( "Error: missing overview (string)" );
-        return;
+        return response.status( 500 ).json( {message: "Error: missing overview (string)"} );
     }
     if ( request.body.description == null ) {
-        response.status( 500 )
-                .send( "Error: missing description (string)" );
-        return;
+        return response.status( 500 ).json( {message: "Error: missing description (string)"} );
     }
     if ( request.body.distanceFromSun == null ) {
-        response.status( 500 )
-                .send( "Error: missing distance from Sun (double)" );
-        return;
+        return response.status( 500 ).json( {message: "Error: missing distance from Sun (double)"} );
     }
     if ( request.body.numberOfMoons == null ) {
-        response.status( 500 )
-                .send( "Error: missing number of moons (int)" );
-        return;
+        return response.status( 500 ).json( {message: "Error: missing number of moons (int)"} );
     }
 
     // Validation rule: force planetId (if exists)
@@ -105,41 +93,24 @@ planetRouter.route('/form')
 .post(upload.single('image'), function (request, response, next) {
     // Prevent multiple Plutos from being created
     if ( planetsDB.count() > 8 ) {
-        response.status( 500 )
-                .send( "Error: Pluto already exits!" );
-        return;
-    }
-
-    // validate mime-type of image file
-    if ( request.file.mimetype != 'image/jpeg' && request.file.mimetype != 'image/png' ) {
-        return response.status(500).json({message: "Error: must upload image/jpeg or image/png for the planet's image."});
+        return response.status( 500 ).json( {message: "Error: Pluto already exits!"} );
     }
 
     // Validation rule: mandatory properties
     if ( request.body.name == null ) {
-        response.status( 500 )
-                .send( "Error: missing name (string)" );
-        return;
+        return response.status( 500 ).json( {message: "Error: missing name (string)"} );
     }
     if ( request.body.overview == null ) {
-        response.status( 500 )
-                .send( "Error: missing overview (string)" );
-        return;
+        return response.status( 500 ).json( {message: "Error: missing overview (string)"} );
     }
     if ( request.body.description == null ) {
-        response.status( 500 )
-                .send( "Error: missing description (string)" );
-        return;
+        return response.status( 500 ).json( {message: "Error: missing description (string)"} );
     }
     if ( request.body.distanceFromSun == null ) {
-        response.status( 500 )
-                .send( "Error: missing distance from Sun (double)" );
-        return;
+        return response.status( 500 ).json( {message: "Error: missing distance from Sun (double)"} );
     }
     if ( request.body.numberOfMoons == null ) {
-        response.status( 500 )
-                .send( "Error: missing number of moons (int)" );
-        return;
+        return response.status( 500 ).json( {message: "Error: missing number of moons (int)"} );
     }
 
     // Validation rule: force planetId (if exists)
@@ -147,6 +118,10 @@ planetRouter.route('/form')
         request.body.planetId = 0;
     }
 
+    // validate mime-type of image file
+    if ( request.file.mimetype != 'image/jpeg' && request.file.mimetype != 'image/png' ) {
+        return response.status(500).json({message: "Error: must upload image/jpeg or image/png for the planet's image."});
+    }
     request.body.image = "images/upload/" + request.file.originalname;
 
     planetsDB.save( request.body );
@@ -168,7 +143,7 @@ planetRouter.route('/:planetId')
         response.json( planetsDB.find(request.params.planetId) );
     } catch (exception) {
         response.status( 404 )
-                .send( "Planet with Id " + request.params.planetId + " not found!" );
+                .json( {message: "Planet with Id " + request.params.planetId + " not found!"} );
     }
 })
 
@@ -185,42 +160,29 @@ planetRouter.route('/:planetId')
 
         // Validation rule: mandatory properties
         if ( request.body.name == null ) {
-            response.status( 500 )
-                    .send( "Error: missing name (string)" );
-            return;
+            return response.status( 500 ).json( {message: "Error: missing name (string)"} );
         }
         if ( request.body.overview == null ) {
-            response.status( 500 )
-                    .send( "Error: missing overview (string)" );
-            return;
+            return response.status( 500 ).json( {message: "Error: missing overview (string)"} );
         }
         if ( request.body.description == null ) {
-            response.status( 500 )
-                    .send( "Error: missing description (string)" );
-            return;
+            return response.status( 500 ).json( {message: "Error: missing description (string)"} );
         }
         if ( request.body.distanceFromSun == null ) {
-            response.status( 500 )
-                    .send( "Error: missing distance from Sun (double)" );
-            return;
+            return response.status( 500 ).json( {message: "Error: missing distance from Sun (double)"} );
         }
         if ( request.body.numberOfMoons == null ) {
-            response.status( 500 )
-                    .send( "Error: missing number of moons (int)" );
-            return;
+            return response.status( 500 ).json( {message: "Error: missing number of moons (int)"} );
         }
         if ( request.body.image == null ) {
-            response.status( 500 )
-                    .send( "Error: missing image (string))" );
-            return;
+            return response.status( 500 ).json( {message: "Error: missing image (string))"} );
         }
 
         // Validation rule: body's planetId must match query param's planetId
         if ( request.body.planetId != null ) {
             if (request.body.planetId != request.params.planetId) {
-                response.status( 500 )
-                        .send( "Error: planetId does not match" );
-                return;
+                return response.status( 500 )
+                        .json( {message: "Error: planetId does not match"} );
             }
         }
 
@@ -233,7 +195,7 @@ planetRouter.route('/:planetId')
     } catch (expection) {
         console.log( expection );
         response.status( 404 )
-                .send( "Planet with Id " + request.params.planetId + " not found!" );
+                .json( {message: "Planet with Id " + request.params.planetId + " not found!"} );
     }
 })
 
@@ -248,9 +210,8 @@ planetRouter.route('/:planetId')
     try {
         // Validation rule: prevent deleting Mars..Earth..Neptune
         if ( request.params.planetId <= 7 ) {
-            response.status( 500 )
-                    .send( "Error: cannot delete this planet." );
-            return;
+            return response.status( 500 )
+                           .json( {message: "Error: cannot delete this planet."} );
         }
 
         thePlanet = planetsDB.find( request.params.planetId );
@@ -265,7 +226,7 @@ planetRouter.route('/:planetId')
     } catch (exception) {
         console.log(exception);
         response.status( 404 )
-                .send( "Planet with Id " + request.params.planetId + " not found!" );
+                .json( {message: "Planet with Id " + request.params.planetId + " not found!"} );
     }
 });
 
@@ -299,7 +260,7 @@ planetRouter.route('/:planetId/image')
     } catch (exception) {
         console.log(exception);
         response.status( 404 )
-                .send( "Planet with Id " + request.params.planetId + " not found!" );
+                .json( {message: "Planet with Id " + request.params.planetId + " not found!"} );
     }
 })
 
@@ -330,7 +291,7 @@ planetRouter.route('/:planetId/image')
             } catch (exception) {
                 console.log(exception);
                 response.status( 404 )
-                        .send( "Planet with Id " + request.params.planetId + " not found!" + " " + exception );
+                        .json( {message: "Planet with Id " + request.params.planetId + " not found!" + " " + exception} );
             }
         });
     });
