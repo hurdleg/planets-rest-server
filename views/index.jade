@@ -2,6 +2,15 @@ extends layout
 
 block content
   h1= title
+  h2 Home Page
+  h4 Bluemix
+  ul
+    li: a(href="https://planets.mybluemix.net" target="_blank") https://planets.mybluemix.net
+
+  h4 Localhost
+  ul
+    li: a(href="http://localhost:3000" target="_blank") http://localhost:3000
+
   h2 REST Resources
   h4 Bluemix
   ul
@@ -14,15 +23,6 @@ block content
     li: a(href="http://localhost:3000/planets" target="_blank") http://localhost:3000/planets
     li: a(href="http://localhost:3000/planets/{id}" target="_blank") http://localhost:3000/planets/{id}
     li: a(href="http://localhost:3000/planets/{id}/image" target="_blank") http://localhost:3000/planets/{id}/image
-
-  h2 Home Page
-  h4 Bluemix
-  ul
-    li: a(href="https://planets.mybluemix.net" target="_blank") https://planets.mybluemix.net
-
-  h4 Localhost
-  ul
-    li: a(href="http://localhost:3000" target="_blank") http://localhost:3000
 
   h2 Source Code
   p Available from GitHub:
