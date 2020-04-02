@@ -1,11 +1,11 @@
 {
   "name": "planets-rest-server",
   "main": "./bin/www",
-    "description": "REST API Server for the Planets of Our Solar System",
+  "description": "REST API Server for the Planets of Our Solar System",
   "version": "1.0.2",
   "private": false,
   "engines": {
-    "node": "4.8.*"
+    "node": "10.*"
   },
   "scripts": {
     "start": "node ./bin/www"
@@ -15,18 +15,18 @@
     "url": "https://github.com/hurdleg/planets-rest-server.git"
   },
   "dependencies": {
-    "body-parser": "~1.13.2",
+    "body-parser": "^1.19.0",
     "busboy": "^0.2.13",
+    "cf-deployment-tracker-client": "*",
+    "cfenv": "^1.2.2",
     "connect-busboy": "0.0.2",
     "cookie-parser": "~1.3.5",
     "debug": "~2.6.9",
-    "express": "~4.13.1",
+    "express": "^4.17.1",
     "jade": "~1.11.0",
-    "morgan": "~1.6.1",
+    "morgan": "^1.10.0",
     "multer": "^1.3.0",
-    "serve-favicon": "~2.3.0",
-    "cf-deployment-tracker-client": "*",
-    "cfenv": "1.0.x"
+    "serve-favicon": "^2.5.0"
   },
   "author": "Gerald.Hurdle@AlgonquinCollege.com",
   "license": "MIT"
