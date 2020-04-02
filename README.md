@@ -33,16 +33,18 @@
 
    404 - Planet with Id 8 not found!
 
-## Installation (Bluemix)
+## Installation (IBM Cloud)
 1. build and test app http://localhost:3000
 2. add: mainfest.yml
 3. edit: ./bin/www > var port = normalizePort(process.env.VCAP_APP_PORT || '3000');
 4. edit: package.json > add: cf modules
 5. copy: .cfignore
-6. cf login # email / pw
-7. cf push
+6. ibmcloud login
+7. imbcloud target -o MADandD -s prod
+8. ibmcloud target ## verify settings
+9. ibmcloud cf push
 
-## Usage (Bluemix)
+## Usage (IBM Cloud)
 1. Open a browser
    * https://planets.mybluemix.net
    * https://planets.mybluemix.net/planets
